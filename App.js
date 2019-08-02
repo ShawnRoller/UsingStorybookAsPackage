@@ -37,11 +37,19 @@ class App extends React.Component {
     }
   }
 
+  _renderStorybookButton = () => {
+    if (__DEV__) {
+      return (
+        <TouchableOpacity onPress={() => this.setState({ showStorybook: !this.state.showStorybook })}>
+          <Text>Show Storybook UI, son!</Text>
+        </TouchableOpacity>
+      );
+    }
+  }
+
   render() {
     if (this.state.showStorybook) {
-      return (
-        <StorybookUIRoot />
-      );
+      return <StorybookUIRoot />;
     } else {
       return (
         <Fragment>
@@ -57,9 +65,7 @@ class App extends React.Component {
                 </View>
               )}
               <View style={styles.body}>
-                <TouchableOpacity onPress={() => this.setState({ showStorybook: !this.state.showStorybook })}>
-                  <Text>Show Storybook UI, son!</Text>
-                </TouchableOpacity>
+                {this._renderStorybookButton()}
                 <View style={styles.sectionContainer}>
                   <Text style={styles.sectionTitle}>Step One</Text>
                   <Text style={styles.sectionDescription}>
